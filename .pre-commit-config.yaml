@@ -1,0 +1,55 @@
+exclude: ^migrations/.*$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: no-commit-to-branch
+        name: Проверка, передана ли фиксация в безопасную ветку
+      - id: check-yaml
+        name: Проверка файлов в формате ".yaml"
+        args: ['--allow-multiple-documents']
+      - id: end-of-file-fixer
+        name: Добавим пустую строку в конце, если её нет
+      - id: trailing-whitespace
+        name: Проверка, нет ли лишних пробелов
+        args: ['--markdown-linebreak-ext=md']
+      - id: check-docstring-first
+        name: Проверка расположения строк документации в файлах python
+      - id: check-merge-conflict
+        name: Проверка, нет ли конфликтов в ветке
+      - id: detect-private-key
+        name: Проверка, что нет приватных ключей
+      - id: check-added-large-files
+        name: Проверка на наличие больших файлов
+
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        exclude: ^(migrations\\|migrations/).*$
+        args: [
+          --line-length=79, --skip-string-normalization, --target-version=py312
+        ]
+        name: Форматер кода
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        name: Проверка кода по PEP8
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 6.0.1
+    hooks:
+      - id: isort
+        name: Проверка расположения импортов
+
+# TODO обновить после добавления тестов
+#  - repo: local
+#    hooks:
+#    - id: pytest
+#      name: Запуск тестов
+#      entry: pytest @НАЗВАНИЕ КОРНЕВОЙ ПАПКИ@
+#      language: system
+#      pass_filenames: false

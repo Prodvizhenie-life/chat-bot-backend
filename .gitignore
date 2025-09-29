@@ -1,0 +1,52 @@
+# Виртуальное окружение
+venv/
+.env/
+.venv/
+
+# PyCharm / IntelliJ IDEA
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py.class
+
+# Логи
+*.log
+
+# Бэкапы / дампы
+*.bak
+*.swp
+*.swo
+*.tmp
+*.orig
+
+# Тесты
+.coverage
+.pytest_cache/
+
+# Библиотеки
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Секреты и переменные окружения
+.env.local
+.env.prod
+.env.dev
+
+# OS файлы
+.DS_Store
+Thumbs.db
+
+# SQLite database
+*.sqlite3
+*.db

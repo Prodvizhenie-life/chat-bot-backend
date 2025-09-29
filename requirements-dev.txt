@@ -1,0 +1,8 @@
+# инструменты разработки
+black==25.1.0
+flake8==7.1.1
+isort==6.0.1
+pre-commit==4.0.1
+pytest==8.3.2
+pytest-django==4.9.0
+
