@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Aplication
+from .models import Application
 
 
-class AplicationSerializer(serializers.ModelSerializer):
+class ApplicationSerializer(serializers.ModelSerializer):
     # user_fio = serializers.CharField(source='user.fio', read_only=True)
 
     class Meta:
@@ -18,7 +18,7 @@ class AplicationSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'create_at', 'update_at', 'user']
 
 
-class AplicationCreateUpdateSerializer(serializers.ModelSerializer):
+class ApplicationCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Aplication
+        model = Application
         fields = ['json_data', 'status']

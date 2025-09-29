@@ -2,11 +2,11 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Aplication, ApplicationStatus
-from .serializers import AplicationSerializer, AplicationCreateUpdateSerializer
+from .models import Application, ApplicationStatus
+from .serializers import ApplicationSerializer, ApplicationCreateUpdateSerializer
 
 
-class AplicationViewSet(viewsets.ModelViewSet):
+class ApplicationViewSet(viewsets.ModelViewSet):
     """
     ViewSet для работы с заявками пользователя.
     Предоставляет CRUD операции и кастомные actions.
@@ -15,7 +15,7 @@ class AplicationViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Возвращает только заявки текущего пользователя."""
-        return Aplication.objects.filter(user=self.request.user)
+        return Application.objects.filter(user=self.request.user)
 
     def get_serializer_class(self):
         """
@@ -24,8 +24,8 @@ class AplicationViewSet(viewsets.ModelViewSet):
         - Для остального: AplicationSerializer (все поля + read_only)
         """
         if self.action in ['create', 'update', 'partial_update']:
-            return AplicationCreateUpdateSerializer
-        return AplicationSerializer
+            return ApplicationCreateUpdateSerializer
+        return ApplicationSerializer
 
     def perform_create(self, serializer):
         """
@@ -34,7 +34,7 @@ class AplicationViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
     def create(self, request, *args, **kwargs):
-        draft_aplication = Aplication.objects.filter(
+        draft_aplication = Application.objects.filter(
             user=self.request.user,
             status=ApplicationStatus.DRAFT
         ).first()

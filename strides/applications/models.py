@@ -12,7 +12,7 @@ class ApplicationStatus(models.TextChoices):
     REJECTED = 'rejected', 'Отклонена'
 
 
-class Aplication(models.Model):
+class Application(models.Model):
     """
     Заявки пользователя.
     """
