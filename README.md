@@ -7,3 +7,9 @@ Python 3.12
 ```python
 pip install -r requirements.txt -r requirements-dev.txt
 ```
+
+### Примените миграции
+```python
+python manage.py makemigrations
+python manage.py migrate
+```
