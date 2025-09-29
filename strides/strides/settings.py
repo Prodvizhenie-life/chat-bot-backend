@@ -9,7 +9,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.ProdvizhenieLifeUser'
 
 
 INSTALLED_APPS = [
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'requests',
+    'aplications',
 ]
 
 MIDDLEWARE = [
