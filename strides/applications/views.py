@@ -34,23 +34,28 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         """
         Автоматически привязывает заявку к текущему пользователю при создании.
         """
-        serializer.save(user=self.request.user)
+        serializer.save(
+            user=self.request.user,
+            json_data={},
+            status=ApplicationStatus.DRAFT
+            )
 
     def create(self, request, *args, **kwargs):
-        draft_aplication = Application.objects.filter(
+        draft_application = Application.objects.filter(
             user=self.request.user,
             status=ApplicationStatus.DRAFT
         ).first()
-        if draft_aplication:
-            return self._update_draft(draft_aplication, request.data)
+        if draft_application:
+            return self._update_draft(draft_application, request.data, request.FILES)
         return self._create_new_application(request.data)
 
-    def _update_draft(self, draft_application, data):
+    def _update_draft(self, draft_application, data, files):
         """Обновляет существующий черновик."""
         current_json = draft_application.json_data or {}
         if 'json_data' in data and data['json_data']:
             new_json_data = data['json_data']
-            merged_json = self._deep_merge(current_json, new_json_data)
+            processed_json = self._process_images_in_structure(new_json_data, files)
+            merged_json = {**current_json, **processed_json}
             data['json_data'] = merged_json
         serializer = self.get_serializer(
             draft_application,
@@ -62,29 +67,21 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def _deep_merge(self, original, new):
-        """Рекурсивно оъединяет и сохраняет json"""
-        result = original.copy()
-        for key, value in new.items():
-            if key == 'image' and value:
-                result[key] = self._save_image(value)
-            elif (
-                key in result and isinstance(result[key], dict) and
-                isinstance(value, dict)
-            ):
-                result[key] = self._deep_merge(result[key], value)
-            else:
-                result[key] = value
-        return result
-    
-    def _save_image(image):
-        """Сохраняет картинки"""
-        ...
+    def _process_images_in_structure(self, json_data, files):
+        """🔧 ЗАГЛУШКА: Обрабатывает картинки в структуре."""
+        print("Заглушка: Обработка картинок в структуре")
+        # Пока просто возвращаем данные как есть
+        return json_data
+
+    def _save_image(self, image_data):
+        """🔧 ЗАГЛУШКА: Сохраняет картинки."""
+        print("Заглушка: Сохранение картинки")
+        return image_data  # временно возвращаем как есть
 
     def _create_new_application(self, data):
         """Создает новую заявку."""
         serializer = self.get_serializer(data=data)
         if serializer.is_valid():
-            serializer.save(user=self.request.user)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
