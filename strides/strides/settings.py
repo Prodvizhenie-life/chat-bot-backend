@@ -19,8 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'strides.users',
-    'strides.aplications',
+    'telegram_bot',
+    'users',
+    'applications',
 ]
 
 MIDDLEWARE = [
@@ -33,7 +34,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'strides.strides.urls'
+ROOT_URLCONF = 'strides.urls'
 
 TEMPLATES = [
     {
