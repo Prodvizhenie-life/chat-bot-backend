@@ -21,4 +21,4 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class ApplicationCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
-        fields = ['json_data', 'status']
+        fields = ['id', 'json_data', 'status']

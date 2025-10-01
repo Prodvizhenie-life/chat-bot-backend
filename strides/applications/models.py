@@ -19,7 +19,7 @@ class Application(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='aplications'
+        related_name='applications'
     )
     json_data = models.JSONField(null=True, blank=True)
     status = models.CharField(
