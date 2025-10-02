@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class RequestsConfig(AppConfig):
+class ApplicationsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'strides.aplications'
+    name = 'applications'
