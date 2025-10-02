@@ -19,3 +19,13 @@ python manage.py migrate
 ```python
 python manage.py run_bot
 ```
+
+### Поднять контейнеры
+Заполнить файлы .env в соответствии c .env.example и ./strides/strides/.env.example
+
+В корне проекта:
+```python
+docker compose up --build -d 
+docker compose exec backend python strides/manage.py migrate
+docker compose exec backend python strides/manage.py collectstatic --noinput
+```
