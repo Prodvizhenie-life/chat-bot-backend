@@ -163,17 +163,12 @@ class ApplicationViewSet(viewsets.ModelViewSet):
                     if key in file_urls:
                         file_urls_list.append(file_urls[key])
                 doc_structure['file'] = file_urls_list
-            
-            # Копируем остальные поля кроме 'field'
             for key, value in json_data.items():
-                if key not in ['field', 'file']:  # field и file обрабатываем отдельно
+                if key not in ['field', 'file']:
                     doc_structure[key] = value
-            
             result_data[doc_id] = doc_structure
-        
         else:
             result_data = json_data
-        
         return result_data
 
     def _save_image(self, image_data, field_name=None):
