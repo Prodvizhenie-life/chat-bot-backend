@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import timedelta
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -7,7 +8,7 @@ SECRET_KEY = 'django-insecure-uj!494)7z4)#_r*t0mmm@ip2+)#av(&b+)y4=+(9g%y_q&$)n+
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['93.183.80.181']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'users.ProdvizhenieLifeUser'
 
@@ -19,8 +20,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'strides.users',
-    'strides.aplications',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'users',
+    'applications',
 ]
 
 MIDDLEWARE = [
@@ -33,7 +37,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'strides.strides.urls'
+ROOT_URLCONF = 'strides.urls'
 
 TEMPLATES = [
     {
@@ -51,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'strides.strides.wsgi.application'
+WSGI_APPLICATION = 'strides.wsgi.application'
 
 
 DATABASES = {
@@ -91,3 +95,25 @@ STATIC_URL = 'static/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'users.authentication.CookieJWTAuthentication',
+    ),
+}
+
+DJOSER = {
+    "USER_ID_FIELD": "id",
+    "LOGIN_FIELD": "email",
+    "SERIALIZERS": {
+        "user_create": "users.serializers.UserCreateSerializer",
+        "user": "users.serializers.UserSerializer",
+        "current_user": "users.serializers.UserSerializer",
+    },
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("Bearer", "tma"),
+}

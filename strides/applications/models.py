@@ -12,14 +12,14 @@ class ApplicationStatus(models.TextChoices):
     REJECTED = 'rejected', 'Отклонена'
 
 
-class Aplication(models.Model):
+class Application(models.Model):
     """
     Заявки пользователя.
     """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='aplications'
+        related_name='applications'
     )
     json_data = models.JSONField(null=True, blank=True)
     status = models.CharField(

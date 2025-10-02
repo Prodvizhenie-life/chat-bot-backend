@@ -1,9 +1,8 @@
-# # apps/requests/admin.py
 # from django.contrib import admin
-# from .models import Aplication
+# from .models import Application
 
 
-# @admin.register(Aplication)
+# @admin.register(Application)
 # class ApplicationAdmin(admin.ModelAdmin):
 #     list_display = (
 #         "subject_full_name",
