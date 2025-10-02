@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-uj!494)7z4)#_r*t0mmm@ip2+)#av(&b+)y4=+(9g%y_q&$)n+
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['93.183.80.181']
 
 AUTH_USER_MODEL = 'users.ProdvizhenieLifeUser'
 
@@ -33,7 +33,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'strides.urls'
+ROOT_URLCONF = 'strides.strides.urls'
 
 TEMPLATES = [
     {
@@ -51,7 +51,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'strides.wsgi.application'
+WSGI_APPLICATION = 'strides.strides.wsgi.application'
 
 
 DATABASES = {
