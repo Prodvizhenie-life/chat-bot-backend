@@ -63,13 +63,35 @@ TEMPLATES = [
 WSGI_APPLICATION = 'strides.wsgi.application'
 
 
-DATABASES = {
+DATABASE_ENGINE = os.getenv('DATABASE_ENGINE', default=False) == 'True'
+
+SQLITE_DB = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+POSTGRESQL_DB = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'django'),
+        'USER': os.getenv('POSTGRES_USER', 'django'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', 5432)
+    }
+}
+
+DATABASES = POSTGRESQL_DB if DATABASE_ENGINE else SQLITE_DB
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -125,3 +147,9 @@ SIMPLE_JWT = {
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 FRONTEND_URL = os.getenv('FRONTEND_URL', 'https://example.com')
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
