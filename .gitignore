@@ -50,3 +50,7 @@ Thumbs.db
 # SQLite database
 *.sqlite3
 *.db
+
+# Environment
+.env
+*.env
