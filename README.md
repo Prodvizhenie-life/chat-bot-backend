@@ -15,7 +15,7 @@ Python 3.12
 ## 🚀 Быстро посмотреть
 
 
-- **API Documentation**: `https://back.prodvizhenie.tw1.ru/api/swagger/` Swagger
+- [**API Documentation**](https://back.prodvizhenie.tw1.ru/api/swagger/) Swagger
 
 **Основные эндпоинты:**
 - `POST /api/auth/register/` - регистрация (email или Telegram)
