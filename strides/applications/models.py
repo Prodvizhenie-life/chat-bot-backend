@@ -30,3 +30,13 @@ class Application(models.Model):
     )
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Строковое представление заявки."""
+        user_email = self.user.email if self.user and self.user.email else "Аноним"
+        return f"Заявка #{self.id} - {user_email} - {self.get_status_display()}"
+
+    class Meta:
+        verbose_name = "Заявка"
+        verbose_name_plural = "Заявки"
+        ordering = ['-create_at']
