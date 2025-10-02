@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-uj!494)7z4)#_r*t0mmm@ip2+)#av(&b+)y4=+(9g%y_q&$)n+
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.prodvizhenie.tw1.ru', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.ProdvizhenieLifeUser'
 
