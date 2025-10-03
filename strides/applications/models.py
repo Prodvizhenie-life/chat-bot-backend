@@ -48,8 +48,10 @@ class Application(models.Model):
 
     def __str__(self):
         """Строковое представление заявки."""
-        user_email = self.user.email if self.user and self.user.email else "Аноним"
-        return f"Заявка #{self.id} - {user_email} - {self.get_status_display()}"
+        return (
+            f"Заявка #{self.id} - {self.user.email}"
+            f" - {self.get_status_display()}"
+        )
 
     class Meta:
         verbose_name = "Заявка"
@@ -70,7 +72,10 @@ class Answer(models.Model):
     question_field = models.CharField(
         max_length=100,
         verbose_name='Поле вопроса',
-        help_text='Идентификатор поля вопроса (например, "fio", "passport_photo")'
+        help_text=(
+            'Идентификатор поля вопроса '
+            '(например, "fio", "passport_photo")'
+        )
     )
     question_type = models.CharField(
         max_length=20,
@@ -102,4 +107,7 @@ class Answer(models.Model):
         ]
 
     def __str__(self):
-        return f"Ответ #{self.id} - {self.question_field} - {self.application_id}"
+        return (
+            f"Ответ #{self.id} - {self.question_field}"
+            f" - {self.application_id}"
+        )

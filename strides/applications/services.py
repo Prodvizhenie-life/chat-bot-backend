@@ -9,7 +9,11 @@ class FileStorageService:
     def save_doc(self, image_data, field_name=None):
         """Сохраняет изображение и возвращает URL."""
         safe_field_name = self._get_safe_field_name(field_name)
-        upload_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', safe_field_name)
+        upload_dir = os.path.join(
+            settings.MEDIA_ROOT,
+            'uploads',
+            safe_field_name
+        )
         os.makedirs(upload_dir, exist_ok=True)
         file_extension = os.path.splitext(image_data.name)[1]
         filename = f"{uuid.uuid4()}{file_extension}"
